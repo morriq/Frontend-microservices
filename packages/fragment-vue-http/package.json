@@ -7,7 +7,7 @@
   "scripts": {
     "build": "webpack --mode production --config webpack.server.config.js",
     "watch": "webpack --watch",
-    "start": "HOSTNAME=localhost node index.js"
+    "start": "node index.js"
   },
   "config": {
     "port": "4321"

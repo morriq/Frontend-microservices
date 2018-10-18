@@ -13,9 +13,7 @@ export default function createStore() {
 		},
 		actions: {
 			fetchItems({ commit }) {
-				console.log(hostname);
-
-				return axios.get(`http://${hostname}:${port}/mock`)
+				return axios.get(`http://localhost:${port}/mock`)
 					.then(({ data }) => {
 						commit('setItems', data)
 					})
