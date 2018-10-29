@@ -2,3 +2,5 @@
 /.idea
 lerna-debug.log
 bash.exe.stackdump
+packages/fragment-vue-http/package-lock.json
+package-lock.json
