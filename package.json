@@ -11,7 +11,7 @@
     "start": "node index.js"
   },
   "config": {
-    "port": "1234"
+    "port": "10800"
   },
   "repository": {
     "type": "git",
