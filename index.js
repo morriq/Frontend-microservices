@@ -17,4 +17,4 @@ createServer((request, response) => {
 	request.url = '/index'
 
 	requestHandler(request, response)
-}).listen(port, 'mppoc-beta-web1.gp.local')
+}).listen(port)
