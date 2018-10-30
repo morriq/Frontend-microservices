@@ -11,7 +11,7 @@
   },
   "config": {
     "port": "10801",
-    "applicationsApiUrl": "http://applications-tracker-dev.gp.local"
+    "applicationsApiUrl": "https://applications-tracker-beta.pracuj.pl"
   },
   "keywords": [],
   "author": "",
