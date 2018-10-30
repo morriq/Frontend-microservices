@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
 
-const { port, hostname } = require('./../../environment.js')
+const { applicationsApiUrl } = require('./../../environment.js')
 
 Vue.use(Vuex)
 
@@ -13,9 +13,15 @@ export default function createStore() {
 		},
 		actions: {
 			fetchItems({ commit }) {
-				return axios.get(`http://localhost:${port}/mock`)
+
+				const instance = axios.create({
+					baseURL: applicationsApiUrl,
+					timeout: 1000
+				});
+
+				return instance.get('/user-applications/fake?limit=500')
 					.then(({ data }) => {
-						commit('setItems', data)
+						commit('setItems', data.Applications)
 					})
 			}
 		},

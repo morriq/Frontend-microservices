@@ -7,6 +7,7 @@ const setTracing = (tracingAddress) => ({ tracingAddress })
 const setApplicationName = (applicationName) => ({ applicationName })
 const setAddress = (address) => ({ address })
 const setPort = port => ({ port })
+const setApplicationsApiUrl = applicationsApiUrl => ({applicationsApiUrl})
 
 const { env } = process
 const {
@@ -14,7 +15,8 @@ const {
 	TRACING_HOST,
 	CONSUL_HOST,
 	npm_package_name,
-	npm_package_config_port
+	npm_package_config_port,
+	npm_package_config_applicationsApiUrl
 } = env
 
 module.exports = ({
@@ -23,5 +25,6 @@ module.exports = ({
 	...setConsul(CONSUL_HOST),
 	...setApplicationName(npm_package_name),
 	...setAddress(address()),
-	...setPort(Number(npm_package_config_port))
+	...setPort(Number(npm_package_config_port)),
+	...setApplicationsApiUrl(npm_package_config_applicationsApiUrl)
 })

@@ -1,7 +1,7 @@
 import Vue from 'vue';
 
 import createStore from './app/store.js';
-import Recommendations from './app/Recommendations.vue';
+import Applications from './app/Applications.vue';
 
 
 export default function createApp() {
@@ -9,7 +9,7 @@ export default function createApp() {
 
 	const app = new Vue({
 		store,
-		render: h => h(Recommendations)
+		render: h => h(Applications)
 	});
 
 	return { app, store };

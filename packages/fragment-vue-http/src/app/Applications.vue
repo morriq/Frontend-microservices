@@ -1,17 +1,18 @@
 <template>
     <div id="poc-vue-test">
-        <div class="recommendation" v-for="recommendation in recommendations"
-            :key="recommendation.id"
-             @click="test(recommendation.id)"
+        <div class="recommendation" v-for="application in applications"
+            :key="recommendation.ApplicationId"
+             @click="test(recommendation.ApplicationId)"
         >
-            <h3>{{ recommendation.name}}</h3>
-            <p>{{ recommendation.email}}</p>
+            <h3>{{ application.JobTitle}}</h3>
+            <p>{{ application.Employer }}</p>
+            <p>{{ application.Workplace}}</p>
 
             <br/>
             <br/>
             <br/>
 
-            <p>{{recommendation.body}}</p>
+            <p>{{application.OfferUrl}}</p>
         </div>
     </div>
 </template>
@@ -25,7 +26,7 @@
         },
 
     	computed: {
-        	recommendations() {
+        	applications() {
         		return this.$store.state.items;
             }
         }

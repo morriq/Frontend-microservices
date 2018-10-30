@@ -10,7 +10,8 @@
     "start": "node index.js"
   },
   "config": {
-    "port": "10801"
+    "port": "10801",
+    "applicationsApiUrl": "http://applications-tracker-dev.gp.local"
   },
   "keywords": [],
   "author": "",
