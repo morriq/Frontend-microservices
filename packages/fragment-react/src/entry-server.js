@@ -37,9 +37,6 @@ export default (request) => {
 
 	return axios.get('https://applications-tracker-beta.pracuj.pl/user-applications/fake?limit=500')
 		.catch(() => {
-      span.log({'event': 'request_end'});
-      span.finish();
-
       return {
         data: {
           Applications: []
