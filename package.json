@@ -33,11 +33,11 @@
     "node-tailor": "^3.9.1"
   },
   "dependencies": {
-    "bunyan": "^1.8.12",
+    "bunyan": "1.8.12",
     "consul": "^0.34.0",
-    "jaeger-client": "^3.12.0",
+    "jaeger-client": "3.13.0",
     "node-cmd": "^3.0.0",
-    "opentracing": "^0.14.3",
+    "opentracing": "0.14.3",
     "prom-client": "^11.1.1"
   }
 }

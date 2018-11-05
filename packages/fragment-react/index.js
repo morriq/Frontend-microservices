@@ -1,5 +1,3 @@
-const { createReadStream } = require('fs');
-const { parse } = require('url');
 const { createServer } = require('http');
 
 const { presets } = require('./.babelrc.js');
@@ -16,5 +14,9 @@ createServer(async (request, response) => {
     const { stream } = await renderStream(request);
 
     stream.pipe(response)
+
+  stream.on('end', () => {
+    response.end();
+  });
 
 }).listen(port);

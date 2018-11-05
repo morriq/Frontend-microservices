@@ -1,20 +1,31 @@
-const { createServer } = require('http')
+const Tailor = require('node-tailor')
+const { initTracer, PrometheusMetricsFactory, ProbabilisticSampler } = require('jaeger-client')
+const promClient = require('prom-client')
+const bunyan = require('bunyan')
+const { Tags, FORMAT_HTTP_HEADERS } = require('opentracing')
 
-const { port } = require('./environment.js')
-const microservices = require('./microservices.js')
 
+const serviceName = 'tailor'
+const tracingAddress = 'jaeger.gp.local'
 
-const { requestHandler } = microservices()
+const tracer = 	initTracer(
+  {
+    serviceName,
+    reporter: {
+      agentHost: tracingAddress
+    }
+  },
+  {
+    host: tracingAddress,
+    sampler: new ProbabilisticSampler(1),
+    metrics: new PrometheusMetricsFactory(promClient, serviceName),
+    logger: bunyan.createLogger({
+      name: serviceName
+    })
+  });
 
-createServer((request, response) => {
-	if (request.url === '/favicon.ico') {
-		response.writeHead(200, { 'Content-Type': 'image/x-icon' })
-		response.end('')
-		return
-	}
-
-	request.headers['x-request-uri'] = request.url
-	request.url = '/index'
-
-	requestHandler(request, response)
-}).listen(port)
+module.exports = () => {
+  return new Tailor({
+    tracer
+  })
+}

@@ -7,7 +7,7 @@ const promClient = require('prom-client')
 const bunyan = require('bunyan')
 const { Tags, FORMAT_HTTP_HEADERS } = require('opentracing')
 
-const tracingAddress = 'jaeger'
+const tracingAddress = 'jaeger.gp.local'
 const serviceName = 'frontend:microservices:' + process.env.npm_package_config_port
 
 const tracer = initTracer(
