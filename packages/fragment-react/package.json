@@ -7,7 +7,7 @@
     "build": "webpack --mode production",
     "build:ssr": "cross-env NODE_ENV=production webpack --config ./webpack.ssr.js",
     "watch": "webpack --watch",
-    "start": "cross-env BABEL_ENV=server node index.js"
+    "start": "cross-env NODE_ENV=server node index.js"
   },
   "config": {
     "port": "10801",
