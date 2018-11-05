@@ -1,45 +1,28 @@
-const renderToNodeStream = require('react-dom/server.js')
-const createApp = require('./src')
+const {renderToNodeStream } = require('react-dom/server.js')
 const entryServer = require('./src/entry-server.js')
 const React = require('react')
 const { createServer } = require('http')
-
-const { presets } = require('./.babelrc.js')
-
-require('@babel/register')({
-    presets
-})
+const { Contacts, createStore, Provider } = require('./build/static/ssr/main.js');
 
 const { port } = require('./environment.js')
+
+const reactElement = React.createElement(Contacts)
+
 
 createServer((request, response) => {
 
   entryServer(request)
     .then(state => {
-      const markup = (
-        <div id="contacts">
-          <style>
-            { `.recommendation {
-							width: 250px;
-							padding: 10px;
-							margin: 10px;
-							box-shadow: 0 0 10px black;
-							display: inline-block;
-							}
-						`}
-          </style>
-          {createApp(state)}
-        </div>
-      )
+    	const p = React.createElement(Provider, { store : createStore(state) }, reactElement)
 
-      const foo = renderToNodeStream(markup)
+      const foo = renderToNodeStream(p)
 
 
       foo.on('end', () => {
         response.end()
       })
 
-      response.pipe(foo)
+			foo.pipe(response)
     })
 
 }).listen(port)
