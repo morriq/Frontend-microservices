@@ -1,22 +1,45 @@
-const { createServer } = require('http');
+const renderToNodeStream = require('react-dom/server.js')
+const createApp = require('./src')
+const entryServer = require('./src/entry-server.js')
+const React = require('react')
+const { createServer } = require('http')
 
-const { presets } = require('./.babelrc.js');
+const { presets } = require('./.babelrc.js')
 
 require('@babel/register')({
     presets
-});
+})
 
-const renderStream = require('./render-stream.js');
-const { port } = require('./environment.js');
+const { port } = require('./environment.js')
 
-createServer(async (request, response) => {
+createServer((request, response) => {
 
-    const { stream } = await renderStream(request);
+  entryServer(request)
+    .then(state => {
+      const markup = (
+        <div id="contacts">
+          <style>
+            { `.recommendation {
+							width: 250px;
+							padding: 10px;
+							margin: 10px;
+							box-shadow: 0 0 10px black;
+							display: inline-block;
+							}
+						`}
+          </style>
+          {createApp(state)}
+        </div>
+      )
 
-    stream.pipe(response)
+      const foo = renderToNodeStream(markup)
 
-  stream.on('end', () => {
-    response.end();
-  });
 
-}).listen(port);
+      foo.on('end', () => {
+        response.end()
+      })
+
+      response.pipe(foo)
+    })
+
+}).listen(port)

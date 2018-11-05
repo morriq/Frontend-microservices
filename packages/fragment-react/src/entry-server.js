@@ -1,7 +1,6 @@
 import axios from 'axios'
 import React from 'react'
 
-import createApp from './index.js'
 const { initTracer, PrometheusMetricsFactory, ProbabilisticSampler } = require('jaeger-client')
 const promClient = require('prom-client')
 const bunyan = require('bunyan')
@@ -35,7 +34,7 @@ export default (request) => {
 
   const span = tracer.startSpan('api_call', spanOptions)
 
-	return axios.get('https://applications-tracker-beta.pracuj.pl/user-applications/fake?limit=500')
+	return axios.get('http://applications-tracker-beta.pracuj.pl/user-applications/fake?limit=500')
 		.catch(() => {
       return {
         data: {
@@ -48,24 +47,7 @@ export default (request) => {
       span.log({'event': 'request_end'});
       span.finish();
 
-			const markup = (
-				<div id="contacts">
-					<style>
-						{ `.recommendation {
-							width: 250px;
-							padding: 10px;
-							margin: 10px;
-							box-shadow: 0 0 10px black;
-							display: inline-block;
-							}
-						`}
-					</style>
-					{createApp(state)}
-				</div>
-			);
-			return {
-				state,
-				markup
-			};
+
+			return state
 		});
 };
