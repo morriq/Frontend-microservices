@@ -16,9 +16,12 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
+    "bunyan": "1.8.12",
     "classnames": "^2.2.5",
     "consul": "^0.34.0",
     "ip": "^1.1.5",
+    "jaeger-client": "3.13.0",
+    "opentracing": "0.14.3",
     "prop-types": "^15.6.2",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",

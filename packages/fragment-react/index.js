@@ -13,7 +13,7 @@ const { port } = require('./environment.js');
 
 createServer(async (request, response) => {
 
-    const { stream } = await renderStream();
+    const { stream } = await renderStream(request);
 
     stream.pipe(response)
 
