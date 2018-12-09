@@ -5,24 +5,6 @@ const filterReqHeadersFn = require('node-tailor/lib/filter-headers.js')
 module.exports = ({ agent }, tracer) => {
 	return new Tailor({
 		handledTags: ['script'],
-		handleTag(request, tag, options, context) {
-			if (tag.attributes && tag.attributes.type === 'tailor/plugin') {
-				return `<script>
-								(function (d) {
-						var i;
-						require(d);
-						var arr = ['react', 'react-dom', 'react-redux', 'redux', 'prop-types', 'classnames', 'vue', 'vuex', 'axios'];
-						while (i = arr.pop()) (function (dep) {
-							define(dep, d, function (b) {
-								return b[dep];
-							})
-						})(i);
-					}(['${context['service-common'].src}/dist/bundle.js']));
-			</script>`
-			}
-
-			return ''
-		},
 		filterRequestHeaders(attributes, request) {
 			return {
 				...filterReqHeadersFn(attributes, request),
