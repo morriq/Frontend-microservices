@@ -35,71 +35,12 @@ services:
       timeout: 10s
       retries: 5
 
-  service-vue-file-read:
-    build: packages/fragment-vue-file-read
-    hostname: service-vue-file-read
-    environment:
-    - CONSUL_HOST=consul
-    - TRACING_HOST=jaeger
-    depends_on:
-    - consul
-    healthcheck:
-      test: ["CMD", "curl", "-f", "consul:8500"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-
-  service-vue-http:
-    build: packages/fragment-vue-http
-    hostname: service-vue-http
-    environment:
-    - CONSUL_HOST=consul
-    - TRACING_HOST=jaeger
-    depends_on:
-    - consul
-    healthcheck:
-      test: ["CMD", "curl", "-f", "consul:8500"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-
   service-react:
     build: packages/fragment-react
     hostname: service-react
     environment:
     - CONSUL_HOST=consul
     - TRACING_HOST=jaeger
-    depends_on:
-    - consul
-    healthcheck:
-      test: ["CMD", "curl", "-f", "consul:8500"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-
-  service-dotnet:
-    build: packages/fragment-dotnet
-    environment:
-    - CONSUL_HOST=consul
-    - TRACING_HOST=jaeger
-    ports:
-    - 1231:1231
-    depends_on:
-    - consul
-    healthcheck:
-      test: ["CMD", "curl", "-f", "consul:8500"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-
-  service-common:
-    build: packages/fragment-common
-    hostname: service-common
-    environment:
-    - CONSUL_HOST=consul
-    - TRACING_HOST=jaeger
-    ports:
-    - 1234:80
     depends_on:
     - consul
     healthcheck:
