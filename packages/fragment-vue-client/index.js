@@ -6,6 +6,7 @@ const { createServer } = require('http')
 const { getUrl, consulAddress, address, hostname, port } = require('./environment.js')
 const renderStream = require('./render-stream.js')
 
+
 const bundle = '/dist/bundle.js'
 const pathToBundle = `.${bundle}`
 const bundleStream = createReadStream(pathToBundle)
